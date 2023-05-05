@@ -1,17 +1,23 @@
-FROM node:18
+# Establecemos la imagen base
+FROM node:14-alpine
 
-WORKDIR /usr/src/app
+# Creamos el directorio de la aplicación dentro del contenedor
+WORKDIR /app
 
+# Copiamos el package.json y package-lock.json (si existe)
 COPY package*.json ./
 
+# Instalamos las dependencias de la aplicación
 RUN npm install
 
-COPY . . 
+# Copiamos el resto de los archivos de la aplicación
+COPY . .
 
-EXPOSE 8080
+# Construimos la aplicación para producción
+RUN npm run build
 
-ENV NODE_ENV=production
+# Exponemos el puerto en el que la aplicación va a escuchar
+EXPOSE 3000
 
+# Definimos el comando para iniciar la aplicación
 CMD ["npm", "start"]
-
-# Path: backend\dockerFile
