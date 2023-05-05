@@ -1,5 +1,5 @@
 # Establecemos la imagen base
-FROM node:14-alpine
+FROM node:18-alpine
 
 # Creamos el directorio de la aplicación dentro del contenedor
 WORKDIR /app
